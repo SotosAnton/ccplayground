@@ -40,7 +40,7 @@ void random_depth_search(Maze * maze,size_t *iter,int i,int j)
             int x_tmp = i + maze->dir.x[dir_idx];
             int y_tmp = j + maze->dir.y[dir_idx];           
             
-            if(maze->path->get( x_tmp,y_tmp) == 0) 
+            if(maze->path->get(x_tmp,y_tmp) == 0) 
             {   
                 maze->array->set(i*2+1,j*2+1,maze->empty_cell);
                 maze->array->set(i*2+1+maze->dir.x[dir_idx],j*2+1+maze->dir.y[dir_idx],maze->empty_cell);

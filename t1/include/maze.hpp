@@ -21,6 +21,23 @@ struct Maze {
         array->print();
     }   
 
+    void printColor() const
+    {
+           
+        for(size_t i=0;i<array->rows;i++)
+        {
+            for(size_t j=0;j<array->cols;j++)
+            {   
+                if(  array->get(i,j) == wall_cell)
+                    std::cout << ANSI_BACKGROUND_WHITE <<  "  " << ANSI_COLOR_RESET;
+                else
+                 std::cout << array->get(i,j) << " ";
+            }
+            std::cout << " \n";
+        }
+    
+    }   
+
 
     ~Maze()
     {   

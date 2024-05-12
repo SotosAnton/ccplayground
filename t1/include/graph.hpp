@@ -212,15 +212,15 @@ void mazeToGraphSmart(Graph* graph,const Maze* maze, unsigned *goal_id = nullptr
                             visited_nodes[end_cords] =  graph->nodes.size() - 1;
                             st.push(PointDir(end.i,end.j,0,0));
                         }
-                        // array_cp.set(x_tmp,y_tmp,'.' );
-                        if( array->get(x_tmp , y_tmp) == maze->goal_cell )
+                        array_cp.set(x_tmp,y_tmp,'.' );
+                        if( array->get(end.i , end.j) == maze->goal_cell )
                         {   
                             std::cout << "Graph found goal : " << map_cords << ".\n";
                             if(goal_id) *goal_id = map_cords;
                         }
                     }
 
-                    // array_cp.set(x_step,y_step,'.' );
+                    array_cp.set(x_step,y_step,'.' );
                     graph->nodes.at(current_node).edges.push_back(Edge(visited_nodes[map_cords],path_length));
                     
                     
@@ -247,7 +247,7 @@ void mazeToGraphSmart(Graph* graph,const Maze* maze, unsigned *goal_id = nullptr
 
     //         array_cp.set( tx,ty,'0'+edge.weight );
     //         array_cp.print();
-    //         std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+    //         // std::this_thread::sleep_for(std::chrono::milliseconds(3000));
     //         array_cp.set( tx,ty,' ');   
         
     //     }
@@ -272,6 +272,9 @@ PointDir traversePath( const Maze *maze ,PointDir start, int * path_length , Arr
         unsigned free_count = 0;    
         int free_idx[4] = { 0, 0, 0,0};
 
+        maze->array->get(i , j) == maze->goal_cell;
+        return PointDir(i,j,0,0);
+        
         for(unsigned k=0;k<4;k++)
         {
             int x_tmp = i + 2*maze->dir.x[k];

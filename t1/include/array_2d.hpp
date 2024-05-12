@@ -59,13 +59,31 @@ struct Array2d {
         }
     }
 
+    std::pair<size_t,size_t> min() 
+    {   
+        T val;
+        unsigned index;
+        val = array_ptr[0];
+        index = 0;
+        for(unsigned i=0;i<rows;i++)
+        {
+            if(array_ptr[i] < val)
+            {
+                val = array_ptr[i];
+                index = 1;
+            }
+        }
+
+        return std::pair<size_t,size_t>(index/ cols, index % cols);
+ 
+    }
+    
+
+
     bool valid(int i,int j) const
     {
         return( i >= 0 && j>=0 && i < rows && j < cols);
     }
-
-
-
 
     ~Array2d()
     {   

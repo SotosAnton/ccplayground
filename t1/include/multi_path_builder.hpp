@@ -7,12 +7,13 @@
 #include <algorithm>
 
 double rand_float()  {
-    return ( ( double )rand() ) / ( double )RAND_MAX ;
+    return ( ( double )rng() ) / ( double )RAND_MAX ;
 }
 
 void mazeBuildMulti(Maze * maze , unsigned n_starts = 4)
 {
-    
+    srand(rng()^time(NULL));
+
     std::vector<std::vector<PointDir>> st;
     std::vector<std::vector<int>> contact_lists;
     
@@ -50,6 +51,7 @@ void mazeBuildMulti(Maze * maze , unsigned n_starts = 4)
     }
 
     unsigned iter = 0;
+    unsigned conctacts = 0;
 
     while(true)
     {   
@@ -102,7 +104,8 @@ void mazeBuildMulti(Maze * maze , unsigned n_starts = 4)
                         }
                         else if(contact_list.at(path->get(x_tmp , y_tmp)-1) == 0 )
                         {   
-                            contact_list.at(path->get(x_tmp , y_tmp)-1) = 1;
+                            conctacts++;
+                            contact_list.at(path->get(x_tmp , y_tmp)-1)++;
                             array->set(i*2+1+maze->dir.x[k],j*2+1+ maze->dir.y[k],maze->empty_cell);
                         }
                     }
@@ -130,7 +133,8 @@ void mazeBuildMulti(Maze * maze , unsigned n_starts = 4)
                 break;       
        
 
-    }    
+    }
+    std::cout << "Contacts : " << conctacts << '\n';
 }
 
 #endif //MAZE_BUILDER_MULTI_H

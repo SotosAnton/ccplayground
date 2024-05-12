@@ -29,16 +29,12 @@ void mazeBuildStack(Maze * maze)
 
     st.push(PointDir(0,0,0,0));
 
-    size_t iter = 1;
-    
-   
+    size_t iter = 1;  
 
     while(!st.empty())
     {   
         // std::cout << " st : " << st.size() << "\n";
-        PointDir cur_point = st.top(); st.pop();
-        
-        
+        PointDir cur_point = st.top(); st.pop();       
      
         int i = cur_point.i;
         int j = cur_point.j;     
@@ -114,7 +110,7 @@ void mazeBuildVector(Maze * maze)
     {   
         // std::cout << " st : " << st.size() << "\n";
 
-        int random_start = rand() % (st.size());
+        int random_start = rng() % (st.size());
         std::swap(st.at(random_start),st.back());
 
         PointDir cur_point = st.back();

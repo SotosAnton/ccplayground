@@ -1,0 +1,3 @@
+/home/sotiris/spp/t2/build/CMakeFiles/MySDL2Project.dir
+/home/sotiris/spp/t2/build/CMakeFiles/edit_cache.dir
+/home/sotiris/spp/t2/build/CMakeFiles/rebuild_cache.dir

@@ -126,6 +126,10 @@ void drawPath(const Graph &graph,const std::vector<unsigned>& path, Array2d<char
 {
     unsigned sx = graph.nodes.at(path.at(0)).id / array->cols;
     unsigned sy = graph.nodes.at(path.at(0)).id % array->cols;
+    auto xy_pair = array->unmap(graph.nodes.at(path.at(0)).id);
+    sx = xy_pair.first;
+    sy = xy_pair.second;
+
     array->set(sx,sy,'G');
     sx = graph.nodes.at(path.back()).id / array->cols;
     sy = graph.nodes.at(path.back()).id % array->cols;

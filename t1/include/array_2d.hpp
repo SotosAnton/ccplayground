@@ -7,17 +7,33 @@
 
 template <typename T> 
 struct Array2d { 
-    Array2d(size_t rows,size_t cols,T fill = 0)
+    
+    Array2d(size_t rows, size_t cols, T fill) 
+        : Array2d(rows, cols) // Delegate to the other constructor
     {
+        // Initialize elements with the fill value
+        for (size_t i = 0; i < elements; i++)
+            array_ptr[i] = fill;
+    }
+
+    // Constructor without fill
+    Array2d(size_t rows, size_t cols) {
         this->cols = cols;
         this->rows = rows;
-        elements = cols*rows;
-        array_ptr = (T*) malloc(sizeof(T)*elements);
-        // std::cout << "Array2d constructor\n";
+        elements = cols * rows;
+        array_ptr = static_cast<T*>(malloc(sizeof(T) * elements));
+    }
 
-        for(size_t i=0; i < elements;i++)
-            array_ptr[i] = fill;
-
+    T& operator()(unsigned i, unsigned j)
+    {
+        if(!valid(i,j)) throw std::runtime_error("Array access out of bounds");
+        return array_ptr[ map(i, j) ];
+    }
+    
+    T& operator()(unsigned i, unsigned j) const
+    {
+        if(!valid(i,j)) throw std::runtime_error("Array access out of bounds");
+        return array_ptr[ map(i, j) ];
     }
 
     Array2d(Array2d& t)
@@ -32,19 +48,29 @@ struct Array2d {
 
     }
 
+    size_t map(size_t i,size_t j) const
+    {
+        return i * cols + j;
+    }
+
+    std::pair<size_t, size_t> unmap(size_t i) const
+    {
+        return std::pair<size_t, size_t>( i / cols, i % cols); 
+    }
+
     T get(size_t i,size_t j) const
     {
-        return array_ptr[ i * cols + j ];
+        return array_ptr[ map(i, j) ];
     }
     
     void set(size_t i,size_t j,T value)
     {
-        array_ptr[ i * cols + j ] = value;
+        array_ptr[ map(i, j) ] = value;
     }
     
     void inc(size_t i,size_t j)
     {
-        array_ptr[ i * cols + j ]++;
+        array_ptr[ map(i, j) ]++;
     }
 
     void print() const
@@ -59,7 +85,7 @@ struct Array2d {
         }
     }
 
-    std::pair<size_t,size_t> min() 
+    std::pair<size_t,size_t> min() const
     {   
         T val;
         unsigned index;

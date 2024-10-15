@@ -47,7 +47,7 @@ int main (int argc, const char * argv[]) {
         auto st = std::chrono::high_resolution_clock::now();
         // mazeBuildReccursive(maze.get());
         // mazeBuildVector(maze.get());
-        mazeBuildMulti(maze.get(),64);
+        mazeBuildMulti(maze.get(),4);
         auto elapsed_time = std::chrono::high_resolution_clock::now()-st;
         // std::cout << " Maze generation time : " << std::chrono::duration_cast<std::chrono::milliseconds>( elapsed_time).count() << "ms\n";
         time_maze_gen.push_back(std::chrono::duration_cast<std::chrono::milliseconds>( elapsed_time).count());

@@ -7,7 +7,7 @@
 #include <algorithm>
 
 double rand_float()  {
-    return ( ( double )rng() ) / ( double )RAND_MAX ;
+    return ( ( double )rng() ) / ( double )rng.max() ;
 }
 
 void mazeBuildMulti(Maze * maze , unsigned n_starts = 4)
@@ -31,7 +31,7 @@ void mazeBuildMulti(Maze * maze , unsigned n_starts = 4)
 
     // std::cout << "n_starts_square : " << n_starts_square << '\n';
 
-
+   
     for(unsigned i=0;i<n_starts;i++)
     {   
         int grid_x = i / n_starts_e;
@@ -47,7 +47,7 @@ void mazeBuildMulti(Maze * maze , unsigned n_starts = 4)
         st.push_back(std::vector<PointDir>());
         st.at(i).push_back( PointDir(x_rand,y_rand,0,0));
         // std::cout << "grid  : " << grid_x * step_x <<'<'<<x_rand  << "<"<< (grid_x+1) * step_x << "  , "
-        //                         << grid_y * step_y << "<" << y_rand << ',' << (grid_y+1) * step_y << '\n';
+                                // << grid_y * step_y << "<" << y_rand << '<' << (grid_y+1) * step_y << '\n';
     }
 
     unsigned iter = 0;
@@ -70,7 +70,7 @@ void mazeBuildMulti(Maze * maze , unsigned n_starts = 4)
                 int i = cur_point.i;
                 int j = cur_point.j;     
 
-                if(path->get(i,j) != 0) 
+                if(path->valid(i,j) && path->get(i,j) != 0) 
                     continue;
 
                 iter++;

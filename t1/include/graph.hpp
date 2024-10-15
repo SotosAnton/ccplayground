@@ -175,22 +175,21 @@ void mazeToGraphSmart(Graph* graph,const Maze* maze, unsigned *goal_id = nullptr
         i = tmp.i;
         j = tmp.j;
 
-        unsigned map_cords = i * array->cols + j;
+        unsigned map_cords = array->map(i, j); //i * array->cols + j;
 
         size_t current_node = visited_nodes[map_cords];
 
         for(unsigned k=0;k<4;k++)
-        {   
-            
+        {            
 
             int x_tmp = i + 2*maze->dir.x[k];
             int y_tmp = j + 2*maze->dir.y[k];
             
-            map_cords = x_tmp * array->cols + y_tmp;
+            map_cords = array->map(x_tmp, y_tmp);
 
             if(array->valid(x_tmp , y_tmp))
             {   
-                map_cords = x_tmp * array->cols + y_tmp ;
+                // map_cords = x_tmp * array->cols + y_tmp ;
                 
                 int x_step = i + maze->dir.x[k];
                 int y_step = j + maze->dir.y[k];
@@ -232,7 +231,7 @@ void mazeToGraphSmart(Graph* graph,const Maze* maze, unsigned *goal_id = nullptr
     }
     // std::cout << "array_cp\n";
 
-
+    
     // for(auto node: graph->nodes)
     // {   
     //     int sx = node.id / array_cp.cols;
@@ -272,8 +271,8 @@ PointDir traversePath( const Maze *maze ,PointDir start, int * path_length , Arr
         unsigned free_count = 0;    
         int free_idx[4] = { 0, 0, 0,0};
 
-        maze->array->get(i , j) == maze->goal_cell;
-        return PointDir(i,j,0,0);
+        // maze->array->get(i , j) == maze->goal_cell;
+        // return PointDir(i,j,0,0);
         
         for(unsigned k=0;k<4;k++)
         {

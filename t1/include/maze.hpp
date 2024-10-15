@@ -11,7 +11,7 @@ struct Maze {
     Maze(size_t cols,size_t rows)
     {        
         array = new Array2d<char>(cols*2+1,rows*2+1,wall_cell);
-        path = new Array2d<u_int16_t>(cols,rows);
+        path = new Array2d<u_int16_t>(cols,rows,0);
         
     }
     
